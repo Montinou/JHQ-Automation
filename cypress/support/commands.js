@@ -25,10 +25,11 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 
-Cypress.Commands.add('login',(email,password) => {
+Cypress.Commands.add('login', (email,password) => {
 
   cy.get("input[name='email']").type(email)
   cy.get("input[name='password']").type(password)
   cy.contains('button','Sign In').click()
-  cy.wait(3000)
+  cy.wait(500)
+  
 })

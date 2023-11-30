@@ -1,6 +1,8 @@
-/// <reference types="cypress" />
 
-const user = ".utils/Users.json"
+/// <reference types="Cypress" />
+import { aliasQuery, aliasMutation } from '../utils/graphql-test-utils.js'
+
+const CreateAccount = ".utils/CreateAccount.json"
 
 
 context('Testing JusticeHQ - Createaccount', () => {
@@ -21,7 +23,7 @@ context('Testing JusticeHQ - Createaccount', () => {
 
   it('Createaccount', () => {
     
-    cy.readFile(user).then((obj) => {
+    cy.readFile(CreateAccount).then((obj) => {
       cy.window().then(w => w.beforeReload = true)
       cy.get("input[name='firstName']").type(obj.firstName)
       cy.get("input[name='lastName']").type(obj.lastName+String(obj.ID))
@@ -31,7 +33,27 @@ context('Testing JusticeHQ - Createaccount', () => {
       cy.get("input[name='repeatPassword']").type(obj.password)
       cy.get("input[name='terms']").click()
       cy.contains('button','Continue').click()
-      cy.window().should('have.prop', 'beforeReload')
+      cy.xpath("//h6[contains(text(),'I want to create a business account')]")
+      cy.contains('button','Continue').click()
+
+      cy.get("input[id=':r7:']").type("")    /*Lawfirm name*/
+      cy.get("input[id=':r8:']").type("") /*Lawfirm Description*/ 
+      cy.get("input[id=':r9:']").type("") /*Address*/
+      cy.get("input[id=':ra:']").type("") /*City */
+      cy.get("input[id=':rb:']") /*state*/
+      .click()
+      .type('Cali')
+      cy.get("li[id=':rb:-option-0']").click()
+      cy.get("input[id=':rd:']").type("") /*zipcode*/
+      cy.get("input[id=':re:']").click() /*company size*/
+      cy.get("li[id=':re:-option-0']").click()
+      cy.get("input[id=':rg:']").click()
+      cy.get("li[id=':rg:-option-0']").click()
+      cy.contains('button','Continue').click()
+
+      //*[@id="root"]/div[2]/div[2]/div/div[2]/div[2]/button0
+
+      cy.get("input[id=':re:']").click()
 
 
       cy.window().then(w => w.beforeReload = true)
@@ -75,7 +97,7 @@ context('Testing JusticeHQ - Createaccount', () => {
           cy.get("input[name='FreeText']").type(obj.bar)
           cy.get("input[name='btn_quicksearch']").click()
           if (cy.xpath('/html/body/div[1]/div/div/div[3]/div[2]/div[2]/div/div[2]/div/p/b')) {
-            cy.writeFile(user, obj)
+            cy.writeFile(CreateAccount, obj)
             flag = true
           }}
          }

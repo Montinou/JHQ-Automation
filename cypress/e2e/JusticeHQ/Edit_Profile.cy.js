@@ -22,7 +22,7 @@ context('Testing JusticeHQ - Createaccount', () => {
         
     }) 
         it('Edit Bio', () => {
-            cy.login("pedro@bustamante.com", "test1234")
+            cy.Login("pedro@bustamante.com", "test1234")
             cy.contains('button','Sign In').click()
             cy.wait('@gqlgetMarketplaceQuery')
             cy.get('#customized-avatar-button').click()

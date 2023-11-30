@@ -1,0 +1,8 @@
+{
+"ID": 1,
+"caseName" : "CaseAutomation1",
+"caseDescription": "Cypress auto generated description ",
+"leadName": "Automation Lead Name",
+"leadPhone": "341223424",
+"leadEmail": "automation@lead.com"
+}

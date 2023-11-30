@@ -7,6 +7,8 @@ module.exports = defineConfig({
       
     },
     baseUrl: 'http://attorney-share-web1-qa2.us-west-1.elasticbeanstalk.com/',
-    requestTimeout: 10000
+    requestTimeout : 5000,
+    chromeWebSecurity: false,
   },
-});
+  },
+);
